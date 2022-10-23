@@ -35,6 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
 		password: hashedPassword,
 	});
 
+	// 201 shows that a new user has been created
 	if (user) {
 		res.status(201).json({
 			_id: user._id,
@@ -57,6 +58,7 @@ const loginUser = asyncHandler(async (req, res) => {
 	const user = await User.findOne({ email });
 
 	// Check user and passwords match
+	// We need to use await with bcrypt because it sends a promise out
 	if (user && (await bcrypt.compare(password, user.password))) {
 		res.status(200).json({
 			_id: user._id,
