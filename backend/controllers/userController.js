@@ -67,9 +67,23 @@ const loginUser = asyncHandler(async (req, res) => {
 			token: generateToken(user._id),
 		});
 	} else {
+		// 401 is an unauthorized exception
 		res.status(401);
 		throw new Error("Invalid credentials");
 	}
+});
+
+// @desc   Get current user
+// @route  /api/users/me
+// @access Private
+const getMe = asyncHandler(async (req, res) => {
+	// We deconstruct the request so that we get back only the fields below
+	const user = {
+		id: req.user._id,
+		email: req.user.email,
+		name: req.user.name,
+	};
+	res.status(200).json(user);
 });
 
 // Generate token
@@ -82,4 +96,5 @@ const generateToken = (id) => {
 module.exports = {
 	registerUser,
 	loginUser,
+	getMe,
 };
