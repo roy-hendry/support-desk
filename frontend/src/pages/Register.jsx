@@ -21,6 +21,7 @@ function Register() {
 		(state) => state.auth
 	);
 
+	// If we don't have this onChange you can't actually change the values in the fields so it's pretty important
 	const onChange = (e) => {
 		setFormData((prevState) => ({
 			...prevState,

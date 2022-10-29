@@ -9,6 +9,7 @@ const initialState = {
 };
 
 // Register new user
+// AsyncThunk is made to abstract the promise lifecycle actions
 export const register = createAsyncThunk(
 	"auth/register",
 	async (user, thunkAPI) => {
