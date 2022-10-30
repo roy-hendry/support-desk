@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { register } from "../features/auth/authSlice";
+import { register, reset } from "../features/auth/authSlice";
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -15,11 +16,25 @@ function Register() {
 	const { name, email, password, password2 } = formData;
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	// Now if we use this values they'll be the state values from authSlice
-	const { user, isLoading, isSuccess, message } = useSelector(
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
 		(state) => state.auth
 	);
+
+	useEffect(() => {
+		if (isError) {
+			toast.error(message);
+		}
+
+		// Redirect when logged in
+		if (isSuccess || user) {
+			navigate("/");
+		}
+
+		dispatch(reset());
+	}, [isError, isSuccess, user, message, navigate, dispatch]);
 
 	// If we don't have this onChange you can't actually change the values in the fields so it's pretty important
 	const onChange = (e) => {
