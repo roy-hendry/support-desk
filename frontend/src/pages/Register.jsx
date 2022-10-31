@@ -64,7 +64,7 @@ function Register() {
 		<>
 			<section className="heading">
 				<h1>
-					<FaUser /> Register {user}
+					<FaUser /> Register
 				</h1>
 				<p>Please create an account</p>
 			</section>
@@ -74,8 +74,8 @@ function Register() {
 					<div className="form-group">
 						<label>Enter your name:</label>
 						<input
-							className="form-control"
 							type="text"
+							className="form-control"
 							id="name"
 							name="name"
 							value={name}
@@ -87,8 +87,8 @@ function Register() {
 					<div className="form-group">
 						<label>Enter your email:</label>
 						<input
-							className="form-control"
 							type="email"
+							className="form-control"
 							id="email"
 							name="email"
 							value={email}
@@ -100,8 +100,8 @@ function Register() {
 					<div className="form-group">
 						<label>Enter your password:</label>
 						<input
-							className="form-control"
 							type="password"
+							className="form-control"
 							id="password"
 							name="password"
 							value={password}
@@ -113,8 +113,8 @@ function Register() {
 					<div className="form-group">
 						<label>Confirm your password:</label>
 						<input
-							className="form-control"
 							type="password"
+							className="form-control"
 							id="password2"
 							name="password2"
 							value={password2}

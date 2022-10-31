@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-// Get user from local storage
+// Get user from localstorage
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
@@ -15,27 +15,32 @@ const initialState = {
 // Register new user
 // AsyncThunk is made to abstract the promise lifecycle actions
 export const register = createAsyncThunk(
-	"auth/register",
+	'auth/register',
 	async (user, thunkAPI) => {
-		try {
-			return await authService.register(user);
-		} catch (error) {
-			const message =
-				(error.response &&
-					error.response.data &&
-					error.response.data.message) ||
-				error.message ||
-				error.toString();
+	  try {
+		return await authService.register(user)
+	  } catch (error) {
+		const message =
+		  (error.response &&
+			error.response.data &&
+			error.response.data.message) ||
+		  error.message ||
+		  error.toString()
 
-			return thunkAPI.rejectWithValue(message);
-		}
+		return thunkAPI.rejectWithValue(message)
+	  }
 	}
-);
+  )
 
 // Login user
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-	console.log(user);
-});
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+	console.log(user)
+  })
+
+  // Logout user
+  export const logout = createAsyncThunk('auth/logout', async () => {
+	await authService.logout()
+  })
 
 export const authSlice = createSlice({
 	name: "auth",
@@ -63,6 +68,9 @@ export const authSlice = createSlice({
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
+				state.user = null;
+			})
+			.addCase(logout.fulfilled, (state) => {
 				state.user = null;
 			});
 	},
