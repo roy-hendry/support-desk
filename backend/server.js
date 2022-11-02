@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 // Routes
 // /api/users has been set to work on the userRoutes file's contents
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/tickets", require("./routes/ticketRoutes"));
 
 app.use(errorHandler);
 
