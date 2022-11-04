@@ -15,6 +15,7 @@ app.use(express.json());
 // Allows us to accept the url encoded form
 app.use(express.urlencoded({ extended: false }));
 
+// The default until we send them to the appropriate routes
 app.get("/", (req, res) => {
 	res.status(200).json({ message: "Welcome to the Support Desk API" });
 });
