@@ -15,22 +15,22 @@ const initialState = {
 // Register new user
 // AsyncThunk is made to abstract the promise lifecycle actions
 export const register = createAsyncThunk(
-	'auth/register',
+	"auth/register",
 	async (user, thunkAPI) => {
-	  try {
-		return await authService.register(user)
-	  } catch (error) {
-		const message =
-		  (error.response &&
-			error.response.data &&
-			error.response.data.message) ||
-		  error.message ||
-		  error.toString()
+		try {
+			return await authService.register(user);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
 
-		return thunkAPI.rejectWithValue(message)
-	  }
+			return thunkAPI.rejectWithValue(message);
+		}
 	}
-  )
+);
 
 // Login user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
