@@ -40,6 +40,7 @@ function Register() {
 	// If we don't have this onChange you can't actually change the values in the fields so it's pretty important
 	const onChange = (e) => {
 		setFormData((prevState) => ({
+			// prevState means the original value that was in there - so it doesn't get wiped out. e.target.value is the value in the field
 			...prevState,
 			[e.target.name]: e.target.value,
 		}));

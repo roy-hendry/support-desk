@@ -6,6 +6,7 @@ const API_URL = "/api/tickets/";
 const createTicket = async (ticketData, token) => {
 	const config = {
 		headers: {
+			// This is the same bearer token that we will need to use to access data from postman
 			Authorization: `Bearer ${token}`,
 		},
 	};
