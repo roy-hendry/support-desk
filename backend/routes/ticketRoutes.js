@@ -10,6 +10,10 @@ const {
 
 const { protect } = require("../middleware/authMiddleware");
 
+// Re-route into note router
+const noteRouter = require("./noteRoutes")
+router.use("/:ticketId/notes", noteRouter)
+
 // By using route("/") we can stack multiple types of requests onto the route. This way we don't need to do get and post requests seperately
 router.route("/").get(protect, getTickets).post(protect, createTicket);
 

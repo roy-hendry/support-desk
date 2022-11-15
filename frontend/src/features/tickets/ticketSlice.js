@@ -141,8 +141,13 @@ export const ticketSlice = createSlice({
 			state.message = action.payload
 		})
 		.addCase(closeTicket.fulfilled, (state, action) => {
-			state.isLoading = false
-			state.tickets.map((ticket) => ticket._id === action.payload._id ? (ticket.status = "closed") : ticket)
+			state.isLoading = false;
+			// If we didn't have this part here then the yser would need to refresh the page for the ticket to show up as closed
+			state.tickets.map((ticket) =>
+				ticket._id === action.payload._id
+					? (ticket.status = "closed")
+					: ticket
+			);
 		})
 	},
 });
